@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 from django.conf.urls import url
-from .views import hello_world
+from .views import hello_world, HelloWorldView
 
 
 urlpatterns = [
-    url(r'^$', hello_world, name="hello_world")
+    url(r'^$', HelloWorldView.as_view(), name="hello_world")
 ]
