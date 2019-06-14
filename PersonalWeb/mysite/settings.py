@@ -124,3 +124,111 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+# log setting
+MAIN_LOG_FILE_PATH = os.path.join(BASE_DIR, "logs/main.log")
+DJANGO_LOG_FILE_PATH = os.path.join(BASE_DIR, "logs/django.log")
+MARKDOWN_LOG_FILE_PATH = os.path.join(BASE_DIR, "logs/markdown.log")
+
+LOG_FORMAT = '\n'.join((
+    '/' + '-' * 80,
+    '[%(levelname)s][%(asctime)s][%(process)d:%(thread)d][%(filename)s:%(lineno)d %(funcName)s]:',
+    '%(message)s',
+    '-' * 80 + '/',
+))
+
+if DEBUG:
+    MAIN_LOG_LEVEL = 'DEBUG'
+else:
+    MAIN_LOG_LEVEL = 'ERROR'
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': True,
+
+    'formatters': {
+        'standard': {
+            'format': LOG_FORMAT,
+        },
+    },
+
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse'
+        },
+        'require_debug_true': {
+            '()': 'django.utils.log.CallbackFilter',
+            'callback': lambda x: DEBUG,
+        }
+    },
+    'handlers': {
+        'flylog': {
+            'level': 'CRITICAL',
+            'class': 'flylog.FlyLogHandler',
+            'formatter': 'standard',
+            'source': os.path.basename(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))),
+            'role_list': ['default'],
+        },
+        'main_file': {
+            'level': MAIN_LOG_LEVEL,
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': MAIN_LOG_FILE_PATH,
+            'maxBytes': 1024*1024*500,
+            'backupCount': 5,
+            'formatter': 'standard',
+            },
+        'django_file': {
+            'level': 'ERROR',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': DJANGO_LOG_FILE_PATH,
+            'maxBytes': 1024*1024*500,
+            'backupCount': 5,
+            'formatter': 'standard',
+        },
+        'console': {
+            'level': 'DEBUG',
+            'filters': ['require_debug_true'],
+            'class': 'logging.StreamHandler',
+            'formatter': 'standard'
+        },
+        'maple_flylog': {
+            'level': 'ERROR',
+            'class': 'flylog.FlyLogHandler',
+            'formatter': 'standard',
+            'source': os.path.basename(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))),
+        },
+        'markdown': {
+            'level': MAIN_LOG_LEVEL,
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': MARKDOWN_LOG_FILE_PATH,
+            'maxBytes': 1024*1024*500,
+            'backupCount': 5,
+            'formatter': 'standard',
+        }
+
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['django_file', 'maple_flylog'],
+            'level': 'DEBUG',
+            'propagate': False
+        },
+
+        'django.request': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+        'main': {
+            'handlers': ['console', 'main_file', 'flylog'],
+            'level': MAIN_LOG_LEVEL,
+            'propagate': False
+        },
+        'MARKDOWN': {
+            'handlers': ['console', 'markdown', 'flylog'],
+            'level': MAIN_LOG_LEVEL,
+            'propagate': False
+        }
+    }
+}
