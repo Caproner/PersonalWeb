@@ -5,6 +5,12 @@ from django.shortcuts import render
 from .share.utils import safe_int
 
 
+class IndexView(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, "index.html")
+    def icon(self, request):
+        return render(request, "favicon.ico")
+
 class HelloWorldView(View):
     def get(self, request, *args, **kwargs):
         docs = kwargs.get('docs')
