@@ -2,20 +2,12 @@
 from django.http import HttpResponse
 from django.views.generic.base import View
 from django.shortcuts import render
-from .share.utils import safe_int
 
 
 class IndexView(View):
     def get(self, request, *args, **kwargs):
         return render(request, "index.html")
-    def icon(self, request):
-        return render(request, "favicon.ico")
 
-class HelloWorldView(View):
+class ArkDrawView(View):
     def get(self, request, *args, **kwargs):
-        docs = kwargs.get('docs')
-        article_id = safe_int(kwargs.get('id'))
-        return render(request, "hello_world.html", dict(id=article_id, name=docs))
-
-def hello_world(request):
-    return HttpResponse('hello world')
+        return render(request, "ArkNights/draw.html")
