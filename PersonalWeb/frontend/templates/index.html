@@ -1,19 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>首页 - 帽子的实验场</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="static/lib/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="static/lib/jquery/3.4.1/jquery.min.js"></script>
-  <script src="static/lib/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <style>
-  	body
-  	{
-  		padding-top: 70px;
-  		padding-bottom: 30px;
-  	}
-  </style>
+	<title>
+		{% block title %}
+		首页 - 帽子的实验场
+		{% endblock %}
+	</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="http://118.89.158.235/static/lib/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="http://118.89.158.235/static/lib/jquery/3.4.1/jquery.min.js"></script>
+	<script src="http://118.89.158.235/static/lib/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	{% block css %}
+	{% endblock %}
+	<style>
+	body
+	{
+		padding-top: 70px;
+		padding-bottom: 30px;
+	}
+	</style>
 </head>
 <body>
 	<nav class="navbar navbar-default navbar-fixed-top">
