@@ -8,3 +8,14 @@ def get_star(num):
     for i in range(num):
         str += '★'
     return str
+
+def test():
+    agent_list = []
+    agent_list.append(AgentInfoModel.object.get(name = '白面鸮'))
+    agent_list.append(AgentInfoModel.object.get(name = '史都华德'))
+    agent_list.append(AgentInfoModel.object.get(name = '星熊'))
+    agent_list.append(AgentInfoModel.object.get(name = '阿消'))
+
+    for var in agent_list:
+        var['star'] = get_star(var['rank'])
+    return agent_list
