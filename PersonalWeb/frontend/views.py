@@ -13,7 +13,7 @@ class ArkDrawView(View):
     def get(self, request, *args, **kwargs):
         if request.method == 'GET':
             times = int(request.GET.get('times', default='0'))
-        if times > 10:
+        if times >= 10:
             times = 10
         elif not times == 0:
             times = 1
