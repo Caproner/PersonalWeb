@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 from frontend.model import AgentInfoModel
+from share.logs import logger
+
 
 def get_star(num):
     if not isinstance(num, int):
@@ -24,4 +26,6 @@ def test():
             'rank' : var.rank,
             'star' : get_star(int(var.rank))
         })
+        logger.debug("star = %s", get_star(int(var.rank))
+
     return agent_list
