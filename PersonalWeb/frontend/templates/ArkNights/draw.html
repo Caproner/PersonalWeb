@@ -18,12 +18,7 @@
                     {% for agent in agent_list %}
                         <div class="draw-unit draw-rank{{ agent.rank }}">
                                 <div class="draw-star">
-                                    <script>
-                                        for(var i = 0; i < {{ agent.rank }}; i++)
-                                        {
-                                            document.write('★');
-                                        }
-                                    </script>
+                                    {{ agent.star }}}
                                 </div>
                                 <img src="http://118.89.158.235/static/ArkNights/img/agents/{{ agent.name }}.png">
                                 <div class="draw-job">
@@ -31,78 +26,6 @@
                                 </div>
                         </div>
                     {% endfor %}
-                    <!--
-                    <div class="draw-unit draw-rank6">
-                        <div class="draw-star">★★★★★★</div>
-                        <img src="http://118.89.158.235/static/ArkNights/img/agents/能天使.png">
-                        <div class="draw-job">
-                            <img src="http://118.89.158.235/static/ArkNights/img/jobs/狙击.png">
-                        </div>
-                    </div>
-                    <div class="draw-unit draw-rank3">
-                        <div class="draw-star">★★★</div>
-                        <img src="http://118.89.158.235/static/ArkNights/img/agents/炎熔.png">
-                        <div class="draw-job">
-                            <img src="http://118.89.158.235/static/ArkNights/img/jobs/术师.png">
-                        </div>
-                    </div>
-                    <div class="draw-unit draw-rank4">
-                        <div class="draw-star">★★★★</div>
-                        <img src="http://118.89.158.235/static/ArkNights/img/agents/清道夫.png">
-                        <div class="draw-job">
-                            <img src="http://118.89.158.235/static/ArkNights/img/jobs/先锋.png">
-                        </div>
-                    </div>
-                    <div class="draw-unit draw-rank4">
-                        <div class="draw-star">★★★★</div>
-                        <img src="http://118.89.158.235/static/ArkNights/img/agents/霜叶.png">
-                        <div class="draw-job">
-                            <img src="http://118.89.158.235/static/ArkNights/img/jobs/近卫.png">
-                        </div>
-                    </div>
-                    <div class="draw-unit draw-rank3">
-                        <div class="draw-star">★★★</div>
-                        <img src="http://118.89.158.235/static/ArkNights/img/agents/芙蓉.png">
-                        <div class="draw-job">
-                            <img src="http://118.89.158.235/static/ArkNights/img/jobs/医疗.png">
-                        </div>
-                    </div>
-                    <div class="draw-unit draw-rank5">
-                        <div class="draw-star">★★★★★</div>
-                        <img src="http://118.89.158.235/static/ArkNights/img/agents/红.png">
-                        <div class="draw-job">
-                            <img src="http://118.89.158.235/static/ArkNights/img/jobs/特种.png">
-                        </div>
-                    </div>
-                    <div class="draw-unit draw-rank4">
-                        <div class="draw-star">★★★★</div>
-                        <img src="http://118.89.158.235/static/ArkNights/img/agents/角峰.png">
-                        <div class="draw-job">
-                            <img src="http://118.89.158.235/static/ArkNights/img/jobs/重装.png">
-                        </div>
-                    </div>
-                    <div class="draw-unit draw-rank3">
-                        <div class="draw-star">★★★</div>
-                        <img src="http://118.89.158.235/static/ArkNights/img/agents/芬.png">
-                        <div class="draw-job">
-                            <img src="http://118.89.158.235/static/ArkNights/img/jobs/先锋.png">
-                        </div>
-                    </div>
-                    <div class="draw-unit draw-rank3">
-                        <div class="draw-star">★★★</div>
-                        <img src="http://118.89.158.235/static/ArkNights/img/agents/芙蓉.png">
-                        <div class="draw-job">
-                            <img src="http://118.89.158.235/static/ArkNights/img/jobs/医疗.png">
-                        </div>
-                    </div>
-                    <div class="draw-unit draw-rank5">
-                        <div class="draw-star">★★★★★</div>
-                        <img src="http://118.89.158.235/static/ArkNights/img/agents/梅尔.png">
-                        <div class="draw-job">
-                            <img src="http://118.89.158.235/static/ArkNights/img/jobs/特种.png">
-                        </div>
-                    </div>
-                    !-->
                 </div>
                 <div class="draw-button">
                     <button type="button" class="btn btn-default">寻访一次</button>
