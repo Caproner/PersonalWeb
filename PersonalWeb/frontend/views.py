@@ -11,12 +11,9 @@ class IndexView(View):
 
 class ArkDrawView(View):
     def get(self, request, *args, **kwargs):
-        test_dict = {
-            'name' : '银灰', 
-            'job' : '近卫', 
-            'rank' : 6
-            }
-        model = AgentInfoModel.objects.create(test_dict)
+
+        sliver_grey = AgentInfoModel(name = '银灰', job = '近卫', rank = 6)
+        sliver_grey.save()
 
         agent_list = [
             {'name' : '炎熔', 'job' : '术师', 'rank' : 3, 'star' : '★★★'},
