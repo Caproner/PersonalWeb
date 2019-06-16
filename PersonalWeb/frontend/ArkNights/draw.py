@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from frontend.model import AgentInfoModel
-from share.logs import logger
+from frontend.share.logs import logger
 
 
 def get_star(num):
