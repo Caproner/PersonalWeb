@@ -2,7 +2,7 @@
 from django.http import HttpResponse
 from django.views.generic.base import View
 from django.shortcuts import render
-from .model import AgentInfoModel
+import ArkNights.draw
 
 
 class IndexView(View):
@@ -12,9 +12,7 @@ class IndexView(View):
 class ArkDrawView(View):
     def get(self, request, *args, **kwargs):
 
-        sliver_grey = AgentInfoModel(name = u'银灰', job = u'近卫', rank = 6)
-        sliver_grey.save()
-
+        '''
         agent_list = [
             {'name' : '炎熔', 'job' : '术师', 'rank' : 3, 'star' : '★★★'},
             {'name' : '炎熔', 'job' : '术师', 'rank' : 3, 'star' : '★★★'},
@@ -29,10 +27,9 @@ class ArkDrawView(View):
         ]
         '''
         agent_list = [
-            {'name' : '能天使', 'job' : '狙击', 'rank' : 6, 'star' : '★★★★★★'},
-            {'name' : '天火', 'job' : '术师', 'rank' : 5, 'star' : '★★★★★'},
-            {'name' : '玫兰莎', 'job' : '近卫', 'rank' : 3, 'star' : '★★★'},
-            {'name' : '红豆', 'job' : '先锋', 'rank' : 4, 'star' : '★★★★'}
+            {'name' : '能天使', 'job' : '狙击', 'rank' : 6, 'star' : draw.get_star(6)},
+            {'name' : '天火', 'job' : '术师', 'rank' : 5, 'star' : draw.get_star(5)},
+            {'name' : '玫兰莎', 'job' : '近卫', 'rank' : 3, 'star' : draw.get_star(3)},
+            {'name' : '红豆', 'job' : '先锋', 'rank' : 4, 'star' : draw.get_star(4)}
             ]
-        '''
         return render(request, "ArkNights/draw.html", {'agent_list': agent_list})
