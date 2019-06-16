@@ -2,7 +2,7 @@
 from django.http import HttpResponse
 from django.views.generic.base import View
 from django.shortcuts import render
-import .ArkNights.draw
+import frontend.ArkNights.draw
 
 
 class IndexView(View):
