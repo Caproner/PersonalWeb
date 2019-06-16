@@ -15,6 +15,23 @@
             <div class="panel panel-default">
                 <div class="panel-heading">干员寻访</div>
                 <div class="draw-show">
+                    {% for agent in agent_list %}
+                        <div class="draw-unit draw-rank{{ agent.rank }}">
+                                <div class="draw-star">
+                                    <script>
+                                        for(var i = 0; i < {{ agent.rank }}; i++)
+                                        {
+                                            document.write('★');
+                                        }
+                                    </script>
+                                </div>
+                                <img src="http://118.89.158.235/static/ArkNights/img/agents/{{ agent.name }}.png">
+                                <div class="draw-job">
+                                    <img src="http://118.89.158.235/static/ArkNights/img/jobs/{{ agent.job }}.png">
+                                </div>
+                        </div>
+                    {% endfor %}
+                    <!--
                     <div class="draw-unit draw-rank6">
                         <div class="draw-star">★★★★★★</div>
                         <img src="http://118.89.158.235/static/ArkNights/img/agents/能天使.png">
@@ -85,6 +102,7 @@
                             <img src="http://118.89.158.235/static/ArkNights/img/jobs/特种.png">
                         </div>
                     </div>
+                    !-->
                 </div>
                 <div class="draw-button">
                     <button type="button" class="btn btn-default">寻访一次</button>
