@@ -11,16 +11,16 @@ class IndexView(View):
 class ArkDrawView(View):
     def get(self, request, *args, **kwargs):
         agent_list = [
-            {'name' : '炎熔', 'job' ： '术师', 'rank' ：3, 'star' ： '★★★'},
-            {'name' : '炎熔', 'job' ： '术师', 'rank' ：3, 'star' ： '★★★'},
-            {'name' : '炎熔', 'job' ： '术师', 'rank' ：3, 'star' ： '★★★'},
-            {'name' : '炎熔', 'job' ： '术师', 'rank' ：3, 'star' ： '★★★'},
-            {'name' : '炎熔', 'job' ： '术师', 'rank' ：3, 'star' ： '★★★'},
-            {'name' : '炎熔', 'job' ： '术师', 'rank' ：3, 'star' ： '★★★'},
-            {'name' : '炎熔', 'job' ： '术师', 'rank' ：3, 'star' ： '★★★'},
-            {'name' : '炎熔', 'job' ： '术师', 'rank' ：3, 'star' ： '★★★'},
-            {'name' : '炎熔', 'job' ： '术师', 'rank' ：3, 'star' ： '★★★'},
-            {'name' : '炎熔', 'job' ： '术师', 'rank' ：3, 'star' ： '★★★'}
+            {'name' : '炎熔', 'job' : '术师', 'rank' : 3, 'star' : '★★★'},
+            {'name' : '炎熔', 'job' : '术师', 'rank' : 3, 'star' : '★★★'},
+            {'name' : '炎熔', 'job' : '术师', 'rank' : 3, 'star' : '★★★'},
+            {'name' : '炎熔', 'job' : '术师', 'rank' : 3, 'star' : '★★★'},
+            {'name' : '炎熔', 'job' : '术师', 'rank' : 3, 'star' : '★★★'},
+            {'name' : '炎熔', 'job' : '术师', 'rank' : 3, 'star' : '★★★'},
+            {'name' : '炎熔', 'job' : '术师', 'rank' : 3, 'star' : '★★★'},
+            {'name' : '炎熔', 'job' : '术师', 'rank' : 3, 'star' : '★★★'},
+            {'name' : '炎熔', 'job' : '术师', 'rank' : 3, 'star' : '★★★'},
+            {'name' : '炎熔', 'job' : '术师', 'rank' : 3, 'star' : '★★★'}
         ]
         '''
         agent_list = [
