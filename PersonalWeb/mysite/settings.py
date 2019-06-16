@@ -88,7 +88,7 @@ DATABASES = {
         'ENGINE' : 'django.db.backends.mysql',
         'NAME' : 'PersonalWebDB',
         'USER' : 'caproner',
-        'PASSWD' : 'pokemon7501085',
+        'PASSWORD' : 'pokemon7501085',
         'HOST' : 'localhost',
         'PORT' : '3306'
     }
