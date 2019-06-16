@@ -11,11 +11,17 @@ def get_star(num):
 
 def test():
     agent_list = []
-    agent_list.append(AgentInfoModel.objects.get(name = '白面鸮'))
-    agent_list.append(AgentInfoModel.objects.get(name = '史都华德'))
-    agent_list.append(AgentInfoModel.objects.get(name = '星熊'))
-    agent_list.append(AgentInfoModel.objects.get(name = '阿消'))
+    agent_list.append(AgentInfoModel.objects.get(name = u'白面鸮'))
+    agent_list.append(AgentInfoModel.objects.get(name = u'史都华德'))
+    agent_list.append(AgentInfoModel.objects.get(name = u'星熊'))
+    agent_list.append(AgentInfoModel.objects.get(name = u'阿消'))
 
+    ret_list = []
     for var in agent_list:
-        var['star'] = get_star(var['rank'])
+        ret_list.append({
+            'name' : var.name,
+            'job' : var.job,
+            'rank' : var.rank,
+            'star' : get_star(var.rank)
+        })
     return agent_list
