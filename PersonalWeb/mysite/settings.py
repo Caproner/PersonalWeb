@@ -84,7 +84,14 @@ DATABASES = {
 }
 """
 DATABASES = {
-    'default': {}
+    'default': {
+        'ENGINE' : 'django.db.backends.mysql',
+        'NAME' : 'PersonalWebDB',
+        'USER' : 'root',
+        'PASSWD' : 'pokemon7501085A*',
+        'HOST' : 'localhost',
+        'PORT' : 3306
+    }
 }
 
 # Password validation
