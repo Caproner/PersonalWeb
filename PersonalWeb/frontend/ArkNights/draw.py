@@ -22,6 +22,6 @@ def test():
             'name' : var.name,
             'job' : var.job,
             'rank' : var.rank,
-            'star' : get_star(var.rank)
+            'star' : get_star(int(var.rank))
         })
     return agent_list
