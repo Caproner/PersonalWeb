@@ -12,7 +12,7 @@ class IndexView(View):
 class ArkDrawView(View):
     def get(self, request, *args, **kwargs):
 
-        sliver_grey = AgentInfoModel(name = '银灰', job = '近卫', rank = 6)
+        sliver_grey = AgentInfoModel(name = u'银灰', job = u'近卫', rank = 6)
         sliver_grey.save()
 
         agent_list = [
