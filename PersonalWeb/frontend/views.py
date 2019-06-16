@@ -17,5 +17,5 @@ class ArkDrawView(View):
             times = 10
         elif not times == 0:
             times = 1
-        agent_list = get_agent_list(10)
+        agent_list = get_agent_list(times)
         return render(request, "ArkNights/draw.html", {'agent_list': agent_list})
