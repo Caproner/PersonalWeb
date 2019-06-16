@@ -2,7 +2,7 @@
 from django.http import HttpResponse
 from django.views.generic.base import View
 from django.shortcuts import render
-import frontend.ArkNights.draw
+from frontend.ArkNights.draw import get_star
 
 
 class IndexView(View):
@@ -27,9 +27,9 @@ class ArkDrawView(View):
         ]
         '''
         agent_list = [
-            {'name' : '能天使', 'job' : '狙击', 'rank' : 6, 'star' : draw.get_star(6)},
-            {'name' : '天火', 'job' : '术师', 'rank' : 5, 'star' : draw.get_star(5)},
-            {'name' : '玫兰莎', 'job' : '近卫', 'rank' : 3, 'star' : draw.get_star(3)},
-            {'name' : '红豆', 'job' : '先锋', 'rank' : 4, 'star' : draw.get_star(4)}
+            {'name' : '能天使', 'job' : '狙击', 'rank' : 6, 'star' : get_star(6)},
+            {'name' : '天火', 'job' : '术师', 'rank' : 5, 'star' : get_star(5)},
+            {'name' : '玫兰莎', 'job' : '近卫', 'rank' : 3, 'star' : get_star(3)},
+            {'name' : '红豆', 'job' : '先锋', 'rank' : 4, 'star' : get_star(4)}
             ]
         return render(request, "ArkNights/draw.html", {'agent_list': agent_list})
