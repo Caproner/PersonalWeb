@@ -12,7 +12,7 @@ class IndexView(View):
 class ArkDrawView(View):
     def get(self, request, *args, **kwargs):
         if request.method == 'GET':
-            times = request.GET.get('times', default='0')
+            times = int(request.GET.get('times', default='0'))
         if times > 10:
             times = 10
         elif not times == 0:
