@@ -26,6 +26,6 @@ def test():
             'rank' : var.rank,
             'star' : get_star(int(var.rank))
         })
-        logger.debug("star = %s", get_star(int(var.rank))
+        logger.debug("star = %s", get_star(int(var.rank)
 
-    return agent_list
+    return ret_list
