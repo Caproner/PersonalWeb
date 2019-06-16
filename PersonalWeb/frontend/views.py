@@ -2,7 +2,7 @@
 from django.http import HttpResponse
 from django.views.generic.base import View
 from django.shortcuts import render
-from frontend.ArkNights.draw import test
+from frontend.ArkNights.draw import get_agent_list
 
 
 class IndexView(View):
