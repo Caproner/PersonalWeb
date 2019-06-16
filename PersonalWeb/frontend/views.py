@@ -33,5 +33,5 @@ class ArkDrawView(View):
             {'name' : '红豆', 'job' : '先锋', 'rank' : 4, 'star' : get_star(4)}
             ]
         '''
-        agent_list = get_agent_list()
+        agent_list = get_agent_list(10)
         return render(request, "ArkNights/draw.html", {'agent_list': agent_list})
