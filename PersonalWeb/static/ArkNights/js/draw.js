@@ -1,3 +1,15 @@
+function find_html_block(html_data, block_name){
+    block_name_fixed = "<!-- " + block_name + " -->";
+    for(var i = 0; i < html_data.length - (8 + block_name.length); i++){
+        if(html_data[i] == '<'){
+            if(html_data.substring(i, i + 9 + block_name.length) == block_name_fixed){
+                return i;
+            }
+        }
+    }
+    return -1;
+}
+
 function agent_draw(draw_times){
     var agent_save = $("#js-agent-save").text();
     var agent_times = $("#js-draw-times").text();
@@ -15,7 +27,9 @@ function agent_draw(draw_times){
             "&agent_6=" + agent_6;
     alert(url)
     $.get(url, function(data, status){
-        $("#js-main").html(data);
+        var pos = find_html_block(data, "js-stat-show");
+        $("#js-draw-show").html(data.substring(0, pos));
+        $("#js-stat-show").html(data.substring(pos));
     });
 }
 $(document).ready(function(){
