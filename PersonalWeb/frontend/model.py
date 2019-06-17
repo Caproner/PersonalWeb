@@ -3,6 +3,7 @@ from django.db import models
 import frontend.share.vals
 import json
 import config
+from frontend.share.logs import logger
 
 
 class AgentInfoModel(models.Model):
