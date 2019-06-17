@@ -36,9 +36,20 @@
 	}
 	.stat-show
 	{
+		padding:	20px;
+		height:		300px;
+	}
+	.up-show
+	{
 		text-align:	center;
 		padding:	20px;
-		height:		200px;
+		height:		300px;
+	}
+	.manual-show
+	{
+		text-align:	center;
+		padding:	20px;
+		height:		300px;
 	}
 	.draw-unit
 	{
@@ -100,9 +111,20 @@
 	}
 	.stat-show
 	{
+		padding:	20px;
+		height:		300px;
+	}
+	.up-show
+	{
 		text-align:	center;
 		padding:	20px;
-		height:		200px;
+		height:		300px;
+	}
+	.manual-show
+	{
+		text-align:	center;
+		padding:	20px;
+		height:		300px;
 	}
 	.draw-unit
 	{
