@@ -22,11 +22,23 @@
 		padding-top:	40px;
 		padding-bottom: 20px;
 	}
+	.clean-button
+	{
+		text-align:		center;
+		padding-top:	40px;
+		padding-bottom: 20px;
+	}
 	.draw-show
 	{
 		text-align:	center;
 		padding:	20px;
 		height:		500px;
+	}
+	.stat-show
+	{
+		text-align:	center;
+		padding:	20px;
+		height:		200px;
 	}
 	.draw-unit
 	{
@@ -68,11 +80,13 @@
 	{
 		padding:	10px;
 	}
-	.draw-img
-	{
-
-	}
 	.draw-button
+	{
+		text-align:		center;
+		padding-top:	40px;
+		padding-bottom: 20px;
+	}
+	.clean-button
 	{
 		text-align:		center;
 		padding-top:	40px;
@@ -83,6 +97,12 @@
 		text-align:	center;
 		padding:	20px;
 		height:		300px;
+	}
+	.stat-show
+	{
+		text-align:	center;
+		padding:	20px;
+		height:		200px;
 	}
 	.draw-unit
 	{
