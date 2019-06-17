@@ -23,6 +23,45 @@ class AgentInfoModel(models.Model):
             'rank' : self.rank
         }
         try:
-            rds.lpush(config.AGENT_INFO_BY_RANK % self.rank, json.dumps(elem_dict))
+            rds.hdel(config.AGENT_INFO_BY_RANK % self.rank, self.id)
+            rds.hset(config.AGENT_INFO_BY_RANK % self.rank, self.id, json.dumps(elem_dict))
         except Exception as e:
-            logger.error('ERROR[INFO] %s', e)
+            logger.error('[REDIS]SAVE ERROR %s', e)
+
+    def delete(self, *args, **kwargs):
+        try:
+            rds.hdel(config.AGENT_INFO_BY_RANK % self.rank, self.id)
+        except Exception as e:
+            logger.error('[REDIS]DELETE ERROR %s', e)
+        super(AgentInfoModel, self).delete(*args, **kwargs)
+
+    def filter_rank(self, agent_rank):
+        agent_list = []
+
+        try:
+            agent_list = rds.hgetall(config.AGENT_INFO_BY_RANK % agent_rank)
+        except Exception as e:
+            logger.error('[REDIS]LGETALL ERROR %s', e)
+
+        if len(agent_list) == 0:
+            sql_agent_list = self.objects.filter(rank = agent_rank)
+            if len(sql_agent_list) == 0:
+                logger.error("Empty Rank : %s", agent_rank)
+                return []
+            for var in sql_agent_list:
+                agent = {
+                    'name' : var.name,
+                    'job' : var.job,
+                    'rank' : var.rank
+                }
+                try:
+                    rds.hdel(config.AGENT_INFO_BY_RANK % var.rank, var.id)
+                    rds.hset(config.AGENT_INFO_BY_RANK % var.rank, var.id, json.dumps(agent))
+                except Exception as e:
+                    logger.error('[REDIS]SAVE ERROR %s', e)
+            try:
+                agent_list = rds.hgetall(config.AGENT_INFO_BY_RANK % agent_rank)
+            except Exception as e:
+                logger.error('[REDIS]LGETALL ERROR %s', e)
+
+        return agent_list

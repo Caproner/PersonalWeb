@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from frontend.model import AgentInfoModel
 from share.logs import logger
-import random
+import random, json
 
 
 def get_star(num):
@@ -26,17 +26,13 @@ def random_rank(ur_pr):
             return 5
 
 def get_agent(agent_rank):
-    agent_list = AgentInfoModel.objects.filter(rank = agent_rank)
+    agent_list = AgentInfoModel.filter(agent_rank)
     if len(agent_list) == 0:
-        logger.error("Empty Rank : %s", agent_rank)
         return {}
-    rand_num = random.randint(0, len(agent_list) - 1)
-    ret = {
-        'name' : agent_list[rand_num].name,
-        'job' : agent_list[rand_num].job,
-        'rank' : agent_list[rand_num].rank,
-        'star' : get_star(int(agent_list[rand_num].rank))
-    }
+    rand_num = random.randint(0, len(agent_list / 2) - 1)
+    ret = json.loads(agent_list[rand_num * 2 + 1])
+    ret['name'] = ret['name'].encode('utf-8').decode('utf-8')
+    ret['star'] = get_star(int(ret['rank']))
     logger.debug("Draw %s", ret['name'])
     return ret
 
