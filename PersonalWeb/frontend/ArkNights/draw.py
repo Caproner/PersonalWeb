@@ -26,7 +26,7 @@ def random_rank(ur_pr):
             return 5
 
 def get_agent(agent_rank):
-    agent_list = AgentInfoModel.filter(agent_rank)
+    agent_list = AgentInfoModel.filter_rank(agent_rank)
     if len(agent_list) == 0:
         return {}
     rand_num = random.randint(0, len(agent_list / 2) - 1)
