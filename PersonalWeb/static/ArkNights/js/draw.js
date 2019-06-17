@@ -1,10 +1,10 @@
 function agent_draw(draw_times){
-    var agent_save = $("#js-agent-save").val();
-    var agent_times = $("#js-agent-times").val();
-    var agent_3 = $("#js-agent-3").val();
-    var agent_4 = $("#js-agent-4").val();
-    var agent_5 = $("#js-agent-5").val();
-    var agent_6 = $("#js-agent-6").val();
+    var agent_save = $("#js-agent-save").text();
+    var agent_times = $("#js-draw-times").text();
+    var agent_3 = $("#js-agent-3").text();
+    var agent_4 = $("#js-agent-4").text();
+    var agent_5 = $("#js-agent-5").text();
+    var agent_6 = $("#js-agent-6").text();
     var url = "/ArkNights/draw.html?" + 
             "times=" + draw_times + 
             "&agent_times=" + agent_times +
