@@ -35,7 +35,8 @@ class AgentInfoModel(models.Model):
             logger.error('[REDIS]DELETE ERROR %s', e)
         super(AgentInfoModel, self).delete(*args, **kwargs)
 
-    def filter_rank(self, agent_rank):
+    @classmethod
+    def filter_rank(cls, agent_rank):
         agent_list = []
 
         try:
