@@ -5,15 +5,16 @@ function agent_draw(draw_times){
     var agent_4 = $("#js-agent-4").val();
     var agent_5 = $("#js-agent-5").val();
     var agent_6 = $("#js-agent-6").val();
-    $.get("/ArkNights/draw.html?" + 
+    var url = "/ArkNights/draw.html?" + 
             "times=" + draw_times + 
             "&agent_times=" + agent_times +
             "&agent_save=" + agent_save +
             "&agent_3=" + agent_3 +
             "&agent_4=" + agent_4 +
             "&agent_5=" + agent_5 +
-            "&agent_6=" + agent_6
-            , function(data, status){
+            "&agent_6=" + agent_6;
+    alert(url)
+    $.get(url, function(data, status){
         $("#js-draw-show").html(data);
     });
 }
