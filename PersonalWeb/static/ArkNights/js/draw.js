@@ -38,4 +38,12 @@ $(document).ready(function(){
     $("#js-draw-10").click(function(){
         agent_draw("10");
     });
+    $("#js-clean").click(function(){
+        $("#js-agent-save").text('0');
+        $("#js-draw-times").text('0');
+        $("#js-agent-3").text('0');
+        $("#js-agent-4").text('0');
+        $("#js-agent-5").text('0');
+        $("#js-agent-6").text('0');
+    });
 });
