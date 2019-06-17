@@ -29,7 +29,7 @@ def get_agent(agent_rank):
     agent_list = AgentInfoModel.filter_rank(agent_rank)
     if len(agent_list) == 0:
         return {}
-    rand_num = random.randint(0, len(agent_list / 2) - 1)
+    rand_num = random.randint(0, len(agent_list) / 2 - 1)
     ret = json.loads(agent_list[rand_num * 2 + 1])
     ret['name'] = ret['name'].encode('utf-8').decode('utf-8')
     ret['star'] = get_star(int(ret['rank']))
