@@ -14,7 +14,7 @@ function agent_draw(draw_times){
             "&agent_5=" + agent_5 +
             "&agent_6=" + agent_6;
     $.get(url, function(data, status){
-        $("#js-draw-main").html(data);
+        $("#js-main").html(data);
     });
 }
 $(document).ready(function(){
