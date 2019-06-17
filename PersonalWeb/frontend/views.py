@@ -22,8 +22,6 @@ class ArkDrawView(View):
             agent_num[2] = int(request.GET.get('agent_5', default='0'))
             agent_num[3] = int(request.GET.get('agent_6', default='0'))
 
-        logger.debug('times: %s', times)
-
         if times == 0:
             return render(request, "ArkNights/draw.html")
 
@@ -33,9 +31,7 @@ class ArkDrawView(View):
             times = 1
         agent_draw = get_agent_draw(times, agent_save, agent_num)
 
-        logger.debug('return: %s', agent_draw)
-
-        return render(request, "ArkNights/draw_show.html", {
+        return render(request, "ArkNights/draw_main.html", {
             'agent_list' : agent_draw['agent_list'],
             'agent_times' : agent_times + times,
             'agent_save' : agent_draw['agent_save'],

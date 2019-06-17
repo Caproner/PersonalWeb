@@ -1,0 +1,56 @@
+<div class="col-md-12">
+    <div class="panel panel-default">
+        <div class="panel-heading">干员寻访</div>
+        <div class="draw-show" id = "js-draw-show">
+            {% for agent in agent_list %}
+                <div class="draw-unit draw-rank{{ agent.rank }}">
+                        <div class="draw-star">
+                            {{ agent.star }}
+                        </div>
+                        <div class="draw-img">
+                            <img src="http://118.89.158.235/static/ArkNights/img/agents/{{ agent.name }}.png">
+                        </div>
+                        <div class="draw-job">
+                            <img src="http://118.89.158.235/static/ArkNights/img/jobs/{{ agent.job }}.png">
+                        </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="draw-button">
+            <button type="button" id="js-draw-1" class="btn btn-default">寻访一次</button>
+            <button type="button" id="js-draw-10" class="btn btn-warning">寻访十次</button>
+        </div>
+    </div>
+</div>
+<div class="col-md-3">
+    <div class="panel panel-default">
+        <div class="panel-heading">寻访统计</div>
+        <div class="stat-show" id = "js-stat-show">
+            <p>寻访次数： <span id="js-draw-times">{{ agent_times }}</span></p>
+            <br>
+            <p>三星干员： <span id="js-agent-3">{{ agent_3 }}</span></p>
+            <p>四星干员： <span id="js-agent-4">{{ agent_4 }}</span></p>
+            <p>五星干员： <span id="js-agent-5">{{ agent_5 }}</span></p>
+            <p>六星干员： <span id="js-agent-6">{{ agent_6 }}</span></p>
+            <br>
+            <p>距上次出六星抽卡次数： <div id="js-agent-save">{{ agent_save }}</div></p>
+        </div>
+        <div class="clean-button">
+            <button type="button" id="js-clean" class="btn btn-info">重置统计</button>
+        </div>
+    </div>
+</div>
+<div class="col-md-3">
+    <div class="panel panel-default">
+        <div class="panel-heading">卡池选择</div>
+        <div class="up-show" id = "js-up-show">
+        </div>
+    </div>
+</div>
+<div class="col-md-6">
+    <div class="panel panel-default">
+        <div class="panel-heading">干员图鉴</div>
+        <div class="manual-show" id = "js-manual-show">
+        </div>
+    </div>
+</div>
