@@ -19,9 +19,9 @@ function agent_draw(draw_times){
 }
 $(document).ready(function(){
     $("#js-draw-1").click(function(){
-        agent_draw('1');
+        agent_draw("1");
     });
     $("#js-draw-10").click(function(){
-        agent_draw('10');
+        agent_draw("10");
     });
 });

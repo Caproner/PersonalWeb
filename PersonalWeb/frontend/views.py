@@ -22,12 +22,10 @@ class ArkDrawView(View):
             agent_num[2] = int(request.GET.get('agent_5', default='0'))
             agent_num[3] = int(request.GET.get('agent_6', default='0'))
 
-        logger.debug('url: %s', request.url)
+        logger.debug('times: %s', times)
 
         if times == 0:
             return render(request, "ArkNights/draw.html")
-        
-        logger.debug('url: %s', request.url)
 
         if times >= 10:
             times = 10
