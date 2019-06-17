@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from frontend.model import AgentInfoModel
-from frontend.share.logs import logger
+from share.logs import logger
 import random
 
 

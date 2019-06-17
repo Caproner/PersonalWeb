@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 from django.db import models
-import frontend.share.vals
+import share.vals.rds
 import json
 import config
-from frontend.share.logs import logger
+from share.logs import logger
 
 
 class AgentInfoModel(models.Model):
