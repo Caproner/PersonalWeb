@@ -1,4 +1,5 @@
 function agent_draw(draw_times){
+    alert("!!!!!")
     var agent_save = $("#js-agent-save").val();
     var agent_times = $("#js-agent-times").val();
     var agent_3 = $("#js-agent-3").val();
