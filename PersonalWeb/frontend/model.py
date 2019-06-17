@@ -45,7 +45,7 @@ class AgentInfoModel(models.Model):
             logger.error('[REDIS]LGETALL ERROR %s', e)
 
         if len(agent_list) == 0:
-            sql_agent_list = self.objects.filter(rank = agent_rank)
+            sql_agent_list = cls.objects.filter(rank = agent_rank)
             if len(sql_agent_list) == 0:
                 logger.error("Empty Rank : %s", agent_rank)
                 return []
