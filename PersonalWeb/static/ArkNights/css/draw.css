@@ -8,6 +8,11 @@
 	.draw-job
 	{
 		padding:	10px;
+		transform: scale(0.6);
+	}
+	.draw-img
+	{
+		transform: scale(0.6);
 	}
 	.draw-button
 	{
@@ -19,7 +24,7 @@
 	{
 		text-align:	center;
 		padding:	20px;
-		height:		300px;
+		height:		400px;
 	}
 	.draw-unit
 	{
@@ -60,6 +65,10 @@
 	.draw-job
 	{
 		padding:	10px;
+	}
+	.draw-img
+	{
+
 	}
 	.draw-button
 	{
