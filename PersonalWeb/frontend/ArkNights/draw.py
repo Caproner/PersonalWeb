@@ -36,9 +36,27 @@ def get_agent(agent_rank):
     logger.debug("Draw %s", ret['name'])
     return ret
 
+def get_ur_pr(agent_save):
+    if agent_save < 50:
+        return 2
+    return (agent_save - 48) * 2
 
-def get_agent_list(num):
+def get_agent_draw(num, agent_save, agent_num):
     agent_list = []
     for i in range(num):
-        agent_list.append(get_agent(random_rank(2)))
-    return agent_list
+        ur_pr = get_ur_pr(agent_save)
+        agent = get_agent(random_rank(ur_pr))
+        agent_list.append(agent)
+        agent_num[int(agent['rank']) - 3] += 1
+        if int(agent['rank']) == 6:
+            agent_save = 0
+        else:
+            agent_save += 1
+
+    agent_draw = {}
+    agent_draw['agent_list'] = agent_list
+    agent_draw['agent_save'] = agent_save
+    for i in range(4):
+        agent_draw['agent_' + str(i + 3)] = agent_num[i]
+
+    return agent_draw
