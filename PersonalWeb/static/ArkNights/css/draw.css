@@ -2,17 +2,20 @@
 {
 	.draw-star
 	{
-		margin-top: 3px;
+		margin-top: 2px;
 		font-size:	12px;
 	}
 	.draw-job
 	{
-		padding:	3px;
-		transform: scale(0.6);
+		padding:	2px;
+		width:		32px;
+		height:		32px;
 	}
 	.draw-img
 	{
 		transform: scale(0.6);
+		width:		50px;
+		height:		50px;
 	}
 	.draw-button
 	{
@@ -32,7 +35,7 @@
 		position: 			relative;
 		display: 			inline-block;
 		text-align: 		center;
-		height:				90px;
+		height:				100px;
 		width:				80px;
 	}
 	.draw-rank6
