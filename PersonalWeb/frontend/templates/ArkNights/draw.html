@@ -7,6 +7,10 @@
 {% block css %}
 <link rel="stylesheet" href="http://118.89.158.235/static/ArkNights/css/draw.css">
 {% endblock %}
+
+{% block js %}
+<script src="http://118.89.158.235/static/ArkNights/js/draw.js"></script>
+{% endblock %}
  
 {% block mainbody %}
 <div class="container theme-showcase" role="main">
@@ -14,24 +18,11 @@
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">干员寻访</div>
-                <div class="draw-show">
-                    {% for agent in agent_list %}
-                        <div class="draw-unit draw-rank{{ agent.rank }}">
-                                <div class="draw-star">
-                                    {{ agent.star }}
-                                </div>
-                                <div class="draw-img">
-                                    <img src="http://118.89.158.235/static/ArkNights/img/agents/{{ agent.name }}.png">
-                                </div>
-                                <div class="draw-job">
-                                    <img src="http://118.89.158.235/static/ArkNights/img/jobs/{{ agent.job }}.png">
-                                </div>
-                        </div>
-                    {% endfor %}
+                <div class="draw-show" id = "js-draw-show">
                 </div>
                 <div class="draw-button">
-                    <button type="button" class="btn btn-default" onclick="location.href='http://118.89.158.235/ArkNights/draw.html?times=1'">寻访一次</button>
-                    <button type="button" class="btn btn-warning" onclick="location.href='http://118.89.158.235/ArkNights/draw.html?times=10'">寻访十次</button>
+                    <button type="button" id="draw-1" class="btn btn-default" onclick="location.href='http://118.89.158.235/ArkNights/draw.html?times=1'">寻访一次</button>
+                    <button type="button" id="draw-10" class="btn btn-warning" onclick="location.href='http://118.89.158.235/ArkNights/draw.html?times=10'">寻访十次</button>
                 </div>
             </div>
         </div>
