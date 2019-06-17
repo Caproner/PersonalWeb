@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.db import models
-import share.vals.rds
+from share.vals import rds
 import json
 import config
 from share.logs import logger
