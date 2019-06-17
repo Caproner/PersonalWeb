@@ -1,5 +1,4 @@
 function agent_draw(draw_times){
-    alert("!!!!!")
     var agent_save = $("#js-agent-save").val();
     var agent_times = $("#js-agent-times").val();
     var agent_3 = $("#js-agent-3").val();
@@ -16,12 +15,6 @@ function agent_draw(draw_times){
             "&agent_6=" + agent_6
             , function(data, status){
         $("#js-draw-show").html(data);
-        $("#js-agent-times").val(agent_times);
-        $("#js-agent-save").val(agent_save);
-        $("#js-agent-3").val(agent_3);
-        $("#js-agent-4").val(agent_4);
-        $("#js-agent-5").val(agent_5);
-        $("#js-agent-6").val(agent_6);
     });
 }
 $(document).ready(function(){
