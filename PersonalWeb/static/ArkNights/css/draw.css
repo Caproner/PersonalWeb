@@ -2,12 +2,12 @@
 {
 	.draw-star
 	{
-		margin-top: 5px;
+		margin-top: 3px;
 		font-size:	12px;
 	}
 	.draw-job
 	{
-		padding:	10px;
+		padding:	3px;
 		transform: scale(0.6);
 	}
 	.draw-img
