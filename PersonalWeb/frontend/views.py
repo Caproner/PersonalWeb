@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.views.generic.base import View
 from django.shortcuts import render
 from frontend.ArkNights.draw import get_agent_draw
+from share.logs import logger
 
 
 class IndexView(View):
@@ -24,11 +25,16 @@ class ArkDrawView(View):
         if times == 0:
             return render(request, "ArkNights/draw.html")
         
+        logger.debug('url: %s', request.url)
+
         if times >= 10:
             times = 10
         else:
             times = 1
         agent_draw = get_agent_draw(times, agent_save, agent_num)
+
+        logger.debug('return: %s', agent_draw)
+
         return render(request, "ArkNights/draw_show.html", {
             'agent_list' : agent_draw['agent_list'],
             'agent_times' : agent_times + times,

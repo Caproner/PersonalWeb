@@ -33,7 +33,6 @@ def get_agent(agent_rank):
     ret = json.loads(agent_list[rand_agent[0]])
     ret['name'] = ret['name'].encode('utf-8').decode('utf-8')
     ret['star'] = get_star(int(ret['rank']))
-    logger.debug("Draw %s", ret['name'])
     return ret
 
 def get_ur_pr(agent_save):
