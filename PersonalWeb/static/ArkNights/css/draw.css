@@ -9,12 +9,12 @@
 	{
 		padding:	2px;
 		transform: 	scale(0.6);
-		height:		24px;
+		height:		36px;
 	}
 	.draw-img
 	{
 		transform: 	scale(0.6);
-		height:		48px;
+		height:		50px;
 	}
 	.draw-button
 	{
@@ -26,7 +26,7 @@
 	{
 		text-align:	center;
 		padding:	20px;
-		height:		400px;
+		height:		500px;
 	}
 	.draw-unit
 	{
@@ -34,7 +34,7 @@
 		position: 			relative;
 		display: 			inline-block;
 		text-align: 		center;
-		height:				100px;
+		height:				120px;
 		width:				80px;
 	}
 	.draw-rank6
