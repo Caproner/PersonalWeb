@@ -16,8 +16,6 @@
                             用户名非法：长度应为3~16之间且只包含小写字母、数字和下划线
                         {% elif register_form.password1.errors %}
                             密码非法：长度应为6~18之间且只包含小写字母、数字和下划线
-                        {% elif register_form.password2.errors %}
-                            密码非法：两次输入的密码不一致
                         {% else %}
                             {{ message }}
                         {% endif %}

@@ -67,9 +67,11 @@ class RegisterView(View):
                 sex = register_form.cleaned_data['sex']
                 username = username.strip()
                 if UserInfoModel.get_user(username) != {}:
-                    message = '用户名已被占用'
+                    message = '用户名非法：用户名已被占用'
                 elif UserInfoModel.get_username_from_email(email) != '':
-                    message = '邮箱已被占用'
+                    message = '邮箱非法：邮箱已被占用'
+                elif password1 != password2:
+                    message = '密码非法：两次输入密码不一致'
                 else:
                     new_user = UserInfoModel()
                     new_user.name = username

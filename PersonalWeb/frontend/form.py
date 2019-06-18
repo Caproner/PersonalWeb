@@ -77,9 +77,3 @@ class RegisterForm(forms.Form):
             return self.cleaned_data['password1']
         else:
             raise forms.ValidationError('密码非法', code='invalid password1')
-
-    def clean_password2(self):
-        if self.cleaned_data['password1'] == self.cleaned_data['password2']:
-            return self.cleaned_data['password2']
-        else:
-            raise forms.ValidationError('密码不一致', code='invalid password2')
