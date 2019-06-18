@@ -24,7 +24,7 @@ class UserForm(forms.Form):
         if p.match(username):
             return username
         else:
-            raise forms.ValidationError('用户名非法：长度应为3~16之间且只包含小写字母、数字和下划线', code='invalid username')
+            raise forms.ValidationError('用户名非法', code='invalid username')
     
     def clean_password(self):
         password = self.cleaned_data['password']
@@ -33,4 +33,4 @@ class UserForm(forms.Form):
         if p.match(password):
             return password
         else:
-            raise forms.ValidationError('密码非法：长度应为6~18之间且只包含小写字母、数字和下划线', code='invalid password')
+            raise forms.ValidationError('密码非法', code='invalid password')

@@ -17,9 +17,9 @@
                     {% if login_form.captcha.errors %}
                         验证码错误！
                     {% elif login_form.username.errors %}
-                        {{ login_form.username.errors }}
+                        用户名非法：长度应为3~16之间且只包含小写字母、数字和下划线
                     {% elif login_form.password.errors %}
-                        {{ login_form.password.errors }}
+                        密码非法：长度应为6~18之间且只包含小写字母、数字和下划线
                     {% else %}
                         {{ message }}
                     {% endif %}
