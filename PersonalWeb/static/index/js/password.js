@@ -1,5 +1,5 @@
 function password_sha256(password_id){
-    var x = $('#' + password_id).text();
+    var x = $('#' + password_id).val();
     alert(x);
 }
 
