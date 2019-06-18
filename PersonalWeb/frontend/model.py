@@ -36,17 +36,27 @@ class UserInfoModel(models.Model):
             'c_time' : self.c_time.strftime("%Y-%m-%d %H:%M:%S")
         }
         try:
-            rds.hdel(config.USER_INFO, self.id)
-            rds.hset(config.USER_INFO, self.id, json.dumps(elem_dict))
+            rds.hdel(config.USER_INFO, self.name)
+            rds.hset(config.USER_INFO, self.name, json.dumps(elem_dict))
         except Exception as e:
             logger.error('[REDIS]SAVE ERROR %s', e)
 
     def delete(self, *args, **kwargs):
         try:
-            rds.hdel(config.USER_INFO, self.id)
+            rds.hdel(config.USER_INFO, self.name)
         except Exception as e:
             logger.error('[REDIS]DELETE ERROR %s', e)
         super(UserInfoModel, self).delete(*args, **kwargs)
+
+    @classmethod
+    def get_user(cls, username):
+        user_info = {}
+        try:
+            user_info = json.loads(rds.hget(config.USER_INFO, username))
+        except Exception as e:
+            logger.error('[REDIS]LGETALL ERROR %s', e)
+            user_info = {}
+        return user_info
 
 # 干员信息表model
 class AgentInfoModel(models.Model):

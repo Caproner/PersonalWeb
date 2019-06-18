@@ -26,8 +26,8 @@ class LoginView(View):
             # 密码长度验证
             # 更多的其它验证.....
             try:
-                user = UserInfoModel.objects.get(name=username) 
-                if user.password == password: 
+                user = UserInfoModel.get_user(username) 
+                if user['password'] == password: 
                     return redirect('/index') 
                 else:
                     message = "密码不正确！"
