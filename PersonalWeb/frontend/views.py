@@ -5,6 +5,7 @@ from django.shortcuts import render, redirect
 from frontend.ArkNights.draw import get_agent_draw
 from share.logs import logger
 from frontend.model import UserInfoModel
+from frontend.form import UserForm
 
 
 class NotFoundView(View):
@@ -20,21 +21,26 @@ class LoginView(View):
         return render(request, "login.html")
     def post(self, request, *args, **kwargs):
         if request.method == 'POST':
-            username = request.POST.get('username')
-            password = request.POST.get('password')
-            username = username.strip() # 用户名字符合法性验证
-            # 密码长度验证
-            # 更多的其它验证.....
-            try:
-                user = UserInfoModel.get_user(username) 
-                if user['password'] == password: 
-                    return redirect('/index') 
-                else:
-                    message = "密码不正确！"
-            except:
-                message = "用户名不存在！"
-            return render(request, 'login.html', {'message' : message})
-        return render(request, 'login.html')
+            login_form = UserForm(request.POST)
+            message = "请检查填写的内容！"
+            if login_form.is_valid():
+                username = login_form.cleaned_data['username']
+                password = login_form.cleaned_data['password'] 
+                username = username.strip() # 用户名字符合法性验证
+                # 密码长度验证
+                # 更多的其它验证.....
+                try:
+                    user = UserInfoModel.get_user(username) 
+                    if user['password'] == password: 
+                        return redirect('/index') 
+                    else:
+                        message = "密码不正确！"
+                except:
+                    message = "用户名不存在！"
+            return render(request, 'login.html', {'message':message, 'login_form':login_form})
+            
+        login_form = UserForm()
+        return render(request, 'login.html', {'message':message, 'login_form':login_form})
 
 class RegisterView(View):
     def get(self, request, *args, **kwargs):
