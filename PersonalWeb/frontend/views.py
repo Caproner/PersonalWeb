@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 from django.http import HttpResponse
 from django.views.generic.base import View
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from frontend.ArkNights.draw import get_agent_draw
 from share.logs import logger
+from frontend.model import UserInfoModel
 
 
 class NotFoundView(View):
@@ -17,6 +18,23 @@ class IndexView(View):
 class LoginView(View):
     def get(self, request, *args, **kwargs):
         return render(request, "login.html")
+    def post(self, request, *args, **kwargs):
+        if request.method == 'POST':
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+            username = username.strip() # 用户名字符合法性验证
+            # 密码长度验证
+            # 更多的其它验证.....
+            try:
+                user = UserInfoModel.objects.get(name=username) 
+                if user.password == password: 
+                    return redirect('/index') 
+                else:
+                    message = "密码不正确！"
+            except:
+                message = "用户名不存在！"
+            return render(request, 'login.html', {'message' : message})
+        return render(request, 'login.html')
 
 class RegisterView(View):
     def get(self, request, *args, **kwargs):
