@@ -18,6 +18,7 @@ from django.urls import path
 from django.conf.urls import url, include
 
 urlpatterns = [
+    url(r'^captcha', include('captcha.urls'))  # 增加这一行
     url(r'', include('frontend.urls')),
     path('admin/', admin.site.urls),
 ]
