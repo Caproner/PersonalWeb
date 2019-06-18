@@ -31,7 +31,6 @@ class UserForm(forms.Form):
     
     def clean_password(self):
         true_password = RSA_decode(self.cleaned_data['password'])
-        logger.debug("password: %s", true_password)
         if regex_func(true_password, PASSWORD_REGEX):
             return true_password
         else:

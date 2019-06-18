@@ -6,31 +6,34 @@ from frontend.ArkNights.draw import get_agent_draw
 from share.logs import logger
 from frontend.model import UserInfoModel
 from frontend.form import UserForm, RegisterForm
-import hashlib 
+from share.utils import hash_code, get_ip
 
-
-def hash_code(s, salt='caproner'):# 加点盐
-    h = hashlib.sha256()
-    s += salt
-    h.update(s.encode()) # update方法只接收bytes类型
-    return h.hexdigest()
 
 class NotFoundView(View):
     def get(self, request, *args, **kwargs):
+        ip = get_ip(request)
+        logger.debug("[%s]: 404", ip)
         return render(request, "404.html")
 
 class IndexView(View):
     def get(self, request, *args, **kwargs):
+        ip = get_ip(request)
+        logger.debug("[%s](%s): Open /index", ip, request.session.get('user_name', None))
         return render(request, "index.html")
 
 class LoginView(View):
     def get(self, request, *args, **kwargs):
-        if request.session.get('is_login',None):
+        ip = get_ip(request)
+        if request.session.get('is_login', None):
+            logger.debug("[%s](%s): [IRR]Try to login again, but aborted", ip, request.session.get('user_name', None))
             return redirect('/index')
         login_form = UserForm()
+        logger.debug("[%s]: Open /login", ip)
         return render(request, "login.html", {'login_form':login_form})
     def post(self, request, *args, **kwargs):
-        if request.session.get('is_login',None):
+        ip = get_ip(request)
+        if request.session.get('is_login', None):
+            logger.debug("[%s](%s): [IRR]Try to post login form, but aborted", ip, request.session.get('user_name', None))
             return redirect('/index')
         if request.method == 'POST':
             login_form = UserForm(request.POST)
@@ -44,24 +47,31 @@ class LoginView(View):
                     if user['password'] == hash_code(password): 
                         request.session['is_login'] = True
                         request.session['user_name'] = user['name']
+                        logger.debug("[%s](%s): Login Success", ip, request.session.get('user_name', None))
                         return redirect('/index') 
                     else:
                         message = "密码不正确！"
                 except:
                     message = "用户名不存在！"
+            logger.debug("[%s]: Login Failed", ip)
             return render(request, 'login.html', {'message':message, 'login_form':login_form})
-
+        logger.debug("[%s](%s): [IRR]post login query but not a form", ip, request.session.get('user_name', None))
         login_form = UserForm()
         return render(request, 'login.html', {'message':message, 'login_form':login_form})
 
 class RegisterView(View):
     def get(self, request, *args, **kwargs):
+        ip = get_ip(request)
         if request.session.get('is_login', None): # 登录状态不允许注册。你可以修改这条原则！
+            logger.debug("[%s](%s): Try to register again, but aborted", ip, request.session.get('user_name', None))
             return redirect("/index")
         register_form = RegisterForm()
+        logger.debug("[%s]: Open /register", ip)
         return render(request, "register.html", {'register_form':register_form})
     def post(self, request, *args, **kwargs):
+        ip = get_ip(request)
         if request.session.get('is_login',None):
+            logger.debug("[%s](%s): [IRR]Try to post register form, but aborted", ip, request.session.get('user_name', None))
             return redirect('/index')
         if request.method == 'POST':
             register_form = RegisterForm(request.POST)
@@ -86,21 +96,28 @@ class RegisterView(View):
                     new_user.email = email
                     new_user.sex = sex
                     new_user.save()
+                    logger.debug("[%s]: Register Success", ip)
                     return redirect('/index')
+            logger.debug("[%s]: Register Failed", ip)
             return render(request, 'register.html', {'message':message, 'register_form':register_form})
 
         register_form = UserForm()
+        logger.debug("[%s](%s): [IRR]post register query but not a form", ip, request.session.get('user_name', None))
         return render(request, 'register.html', {'message':message, 'register_form':register_form})
 
 class LogoutView(View):
     def get(self, request, *args, **kwargs):
+        ip = get_ip(request)
         if not request.session.get('is_login', None): # 如果本来就未登录，也就没有登出一说
+            logger.debug("[%s]: [IRR]Try to logout without login, but aborted", ip)
             return redirect("/index")
+        logger.debug("[%s](%s): Logout Success", ip, request.session.get('user_name', None))
         request.session.flush()
         return redirect("/index")
 
 class ArkDrawView(View):
     def get(self, request, *args, **kwargs):
+        ip = get_ip(request)
         if request.method == 'GET':
             times = int(request.GET.get('times', default='0'))
             agent_times = int(request.GET.get('agent_times', default='0'))
@@ -112,6 +129,7 @@ class ArkDrawView(View):
             agent_num[3] = int(request.GET.get('agent_6', default='0'))
 
         if times == 0:
+            logger.debug("[%s](%s): Open /ArkNights/draw", ip, request.session.get('user_name', None))
             return render(request, "ArkNights/draw.html")
 
         if times >= 10:
@@ -119,6 +137,8 @@ class ArkDrawView(View):
         else:
             times = 1
         agent_draw = get_agent_draw(times, agent_save, agent_num)
+
+        logger.debug("[%s](%s): \nDraw result: %s\nUrl: %s", ip, request.session.get('user_name', None), agent_draw['agent_list'], request.get_full_path())
 
         return render(request, "ArkNights/draw_main.html", {
             'agent_list' : agent_draw['agent_list'],

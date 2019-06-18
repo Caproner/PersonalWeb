@@ -17,7 +17,7 @@ function agent_draw(draw_times){
     var agent_4 = $("#js-agent-4").text();
     var agent_5 = $("#js-agent-5").text();
     var agent_6 = $("#js-agent-6").text();
-    var url = "/ArkNights/draw.html?" + 
+    var url = "/ArkNights/draw?" + 
             "times=" + draw_times + 
             "&agent_times=" + agent_times +
             "&agent_save=" + agent_save +
