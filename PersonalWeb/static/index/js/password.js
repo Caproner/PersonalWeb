@@ -15,6 +15,6 @@ function register_crypt(){
     var password1 = rsa($('#id_password1').val());
     $('#id_password1').val(password1);
     var password2 = rsa($('#id_password2').val());
-    $('#id_password1').val(password2);
+    $('#id_password2').val(password2);
     return true;
 }
