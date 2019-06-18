@@ -66,7 +66,7 @@ class UserInfoModel(models.Model):
         return user_info
     
     @classmethod
-    def get_username_from_email(cls, user_email)
+    def get_username_from_email(cls, user_email):
         username = ''
         try:
             username = rds.hget(config.EMAIL_TO_USER, user_email)
