@@ -7,6 +7,9 @@
 {% block css %}
 <link rel="stylesheet" href="http://118.89.158.235/static/index/css/login.css">
 {% endblock %}
+<script src="http://118.89.158.235/static/index/js/password.js"></script>
+{% block js %}
+
 
 {% block mainbody %}
 <div class="container">
@@ -40,7 +43,7 @@
                 {{ login_form.captcha }} 
             </div>
             <button type="reset" class="btn btn-default pull-left">重置</button>
-            <button type="submit" class="btn btn-primary pull-right">登录</button>
+            <button type="submit" class="btn btn-primary pull-right" onsubmit="return login_sha256()">登录</button>
         </form>
     </div>
 </div>
