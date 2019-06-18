@@ -8,6 +8,13 @@ function rsa(password){
 function login_crypt(){
     var password = rsa($('#id_password').val());
     $('#id_password').val(password);
-    alert($('#id_password').val());
+    return true;
+}
+
+function register_crypt(){
+    var password1 = rsa($('#id_password1').val());
+    $('#id_password1').val(password1);
+    var password2 = rsa($('#id_password2').val());
+    $('#id_password1').val(password2);
     return true;
 }

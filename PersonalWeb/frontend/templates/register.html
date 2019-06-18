@@ -4,10 +4,15 @@
 注册 - 帽子的实验场
 {% endblock %}
 
+{% block js %}
+<script src="http://118.89.158.235/static/index/js/password.js"></script>
+<script src="http://118.89.158.235/static/lib/jsencrypt/jsencrypt.min.js"></script>
+{% endblock %}
+
 {% block mainbody %}
     <div class="container">
         <div class="col-md-4 col-md-offset-4">
-            <form class='form-register' action="/register" method="post">
+            <form class='form-register' action="/register" method="post" onsubmit="return register_crypt()">
                 {% if message %}
                     <div class="alert alert-warning">
                         {% if register_form.captcha.errors %}
