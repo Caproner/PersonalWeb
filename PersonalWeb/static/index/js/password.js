@@ -9,5 +9,5 @@ function login_crypt(){
     var password = rsa($('#id_password').val());
     $('#id_password').val(password);
     alert($('#id_password').val());
-    return false;
+    return true;
 }

@@ -1,14 +1,12 @@
 # -*- coding: utf-8 -*-
 from django import forms 
 from captcha.fields import CaptchaField
-import re
+import config
+from share.utils import regex_func, RSA_decode
+
 
 USERNAME_REGEX = r'^[a-z0-9_]{3,16}$'
 PASSWORD_REGEX = r'^[a-z0-9_]{6,18}$'
-
-def regex_func(str, str_regex):
-    p = re.compile(str_regex)
-    return p.match(str)
 
 
 class UserForm(forms.Form):
@@ -31,8 +29,8 @@ class UserForm(forms.Form):
             raise forms.ValidationError('用户名非法', code='invalid username')
     
     def clean_password(self):
-        if regex_func(self.cleaned_data['password'], PASSWORD_REGEX):
-            return self.cleaned_data['password']
+        true_password = RSA_decode(self.cleaned_data['password'])
+            return true_password
         else:
             raise forms.ValidationError('密码非法', code='invalid password')
 
@@ -73,7 +71,12 @@ class RegisterForm(forms.Form):
             raise forms.ValidationError('用户名非法', code='invalid username')
     
     def clean_password1(self):
-        if regex_func(self.cleaned_data['password1'], PASSWORD_REGEX):
-            return self.cleaned_data['password1']
+        true_password = RSA_decode(self.cleaned_data['password1'])
+        if regex_func(true_password, PASSWORD_REGEX):
+            return true_password
         else:
             raise forms.ValidationError('密码非法', code='invalid password1')
+    
+    def clean_password2(self):
+        true_password = RSA_decode(self.cleaned_data['password2'])
+        return true_password
