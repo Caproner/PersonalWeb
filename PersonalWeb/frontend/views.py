@@ -18,21 +18,25 @@ class IndexView(View):
 
 class LoginView(View):
     def get(self, request, *args, **kwargs):
+        if request.session.get('is_login',None):
+            return redirect('/index')
         login_form = UserForm()
         return render(request, "login.html", {'login_form':login_form})
     def post(self, request, *args, **kwargs):
+        if request.session.get('is_login',None):
+            return redirect('/index')
         if request.method == 'POST':
             login_form = UserForm(request.POST)
             message = "请检查填写的内容！"
             if login_form.is_valid():
                 username = login_form.cleaned_data['username']
                 password = login_form.cleaned_data['password'] 
-                username = username.strip() # 用户名字符合法性验证
-                # 密码长度验证
-                # 更多的其它验证.....
+                username = username.strip()
                 try:
                     user = UserInfoModel.get_user(username) 
                     if user['password'] == password: 
+                        request.session['is_login'] = True
+                        request.session['user_name'] = user['name']
                         return redirect('/index') 
                     else:
                         message = "密码不正确！"
@@ -49,7 +53,10 @@ class RegisterView(View):
 
 class LogoutView(View):
     def get(self, request, *args, **kwargs):
-        return render(request, "logout.html")
+        if not request.session.get('is_login', None): # 如果本来就未登录，也就没有登出一说
+            return redirect("/index")
+        request.session.flush()
+        return redirect("/index")
 
 class ArkDrawView(View):
     def get(self, request, *args, **kwargs):
