@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect
 from frontend.ArkNights.draw import get_agent_draw
 from share.logs import logger
 from frontend.model import UserInfoModel
-from frontend.form import UserForm
+from frontend.form import UserForm, RegisterForm
 
 
 class NotFoundView(View):
@@ -51,7 +51,8 @@ class RegisterView(View):
     def get(self, request, *args, **kwargs):
         if request.session.get('is_login', None): # 登录状态不允许注册。你可以修改这条原则！
             return redirect("/index")
-        return render(request, "register.html")
+        register_form = RegisterForm()
+        return render(request, "register.html", {'register_form':register_form})
     def post(self, request, *args, **kwargs):
         if request.session.get('is_login',None):
             return redirect('/index')
