@@ -29,7 +29,7 @@ class UserForm(forms.Form):
             raise forms.ValidationError('用户名非法', code='invalid username')
     
     def clean_password(self):
-        true_password = RSA_decode(self.cleaned_data['password'])
+        true_password = RSA_decode(self.cleaned_data['password']):
             return true_password
         else:
             raise forms.ValidationError('密码非法', code='invalid password')
