@@ -33,7 +33,7 @@ def hash_code(s, salt='caproner'):# 加点盐
     return h.hexdigest()
 
 def get_ip(request):
-    if request.META.has_key('HTTP_X_FORWARDED_FOR'):  
+    if 'HTTP_X_FORWARDED_FOR' in request.META:  
         return request.META['HTTP_X_FORWARDED_FOR']  
     else:  
         return request.META['REMOTE_ADDR']
