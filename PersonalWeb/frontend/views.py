@@ -71,7 +71,7 @@ class RegisterView(View):
                 elif UserInfoModel.get_username_from_email(email) != '':
                     message = '邮箱已被占用'
                 else:
-                    new_user = UserInfoModel.objects.create()
+                    new_user = UserInfoModel()
                     new_user.name = username
                     new_user.password = password1
                     new_user.email = email
