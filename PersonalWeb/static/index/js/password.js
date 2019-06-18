@@ -124,6 +124,7 @@ function password_sha256(password_id){
     x = x + 'caproner';
     x = SHA256(x);
     alert(x);
+    $('#' + password_id).val(x);
 }
 
 function login_sha256(){

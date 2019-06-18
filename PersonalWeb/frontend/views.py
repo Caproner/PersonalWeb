@@ -6,7 +6,14 @@ from frontend.ArkNights.draw import get_agent_draw
 from share.logs import logger
 from frontend.model import UserInfoModel
 from frontend.form import UserForm, RegisterForm
+import hashlib 
 
+
+def hash_code(s, salt='caproner'):# 加点盐
+    h = hashlib.sha256()
+    s += salt
+    h.update(s.encode()) # update方法只接收bytes类型
+    return h.hexdigest()
 
 class NotFoundView(View):
     def get(self, request, *args, **kwargs):
@@ -34,7 +41,7 @@ class LoginView(View):
                 username = username.strip()
                 try:
                     user = UserInfoModel.get_user(username) 
-                    if user['password'] == password: 
+                    if user['password'] == hash_code(password): 
                         request.session['is_login'] = True
                         request.session['user_name'] = user['name']
                         return redirect('/index') 
@@ -75,7 +82,7 @@ class RegisterView(View):
                 else:
                     new_user = UserInfoModel()
                     new_user.name = username
-                    new_user.password = password1
+                    new_user.password = hash_code(password1)
                     new_user.email = email
                     new_user.sex = sex
                     new_user.save()

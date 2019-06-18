@@ -14,7 +14,7 @@
 {% block mainbody %}
 <div class="container">
     <div class="col-md-4 col-md-offset-4">
-        <form class='form-login' action="/login" method="post" onsubmit="return login_sha256()">
+        <form class='form-login' action="/login" method="post">
             {% if message %}
                 <div class="alert alert-warning">
                     {% if login_form.captcha.errors %}
