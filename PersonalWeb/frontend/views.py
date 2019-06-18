@@ -10,6 +10,18 @@ class IndexView(View):
     def get(self, request, *args, **kwargs):
         return render(request, "index.html")
 
+class LoginView(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, "login.html")
+
+class RegisterView(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, "register.html")
+
+class LogoutView(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, "logout.html")
+
 class ArkDrawView(View):
     def get(self, request, *args, **kwargs):
         if request.method == 'GET':
