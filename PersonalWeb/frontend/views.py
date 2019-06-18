@@ -6,6 +6,10 @@ from frontend.ArkNights.draw import get_agent_draw
 from share.logs import logger
 
 
+class NotFoundView(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, "404.html")
+
 class IndexView(View):
     def get(self, request, *args, **kwargs):
         return render(request, "index.html")
