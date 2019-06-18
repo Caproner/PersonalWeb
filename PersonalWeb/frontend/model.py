@@ -33,7 +33,7 @@ class UserInfoModel(models.Model):
             'password' : self.password,
             'email' : self.email,
             'sex' : self.sex,
-            'c_time' : self.c_time
+            'c_time' : self.c_time.strftime("%Y-%m-%d %H:%M:%S")
         }
         try:
             rds.hdel(config.USER_INFO, self.id)
