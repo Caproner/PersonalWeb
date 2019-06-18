@@ -18,7 +18,8 @@ class IndexView(View):
 
 class LoginView(View):
     def get(self, request, *args, **kwargs):
-        return render(request, "login.html")
+        login_form = UserForm()
+        return render(request, "login.html", {'login_form':login_form})
     def post(self, request, *args, **kwargs):
         if request.method == 'POST':
             login_form = UserForm(request.POST)
@@ -38,7 +39,7 @@ class LoginView(View):
                 except:
                     message = "用户名不存在！"
             return render(request, 'login.html', {'message':message, 'login_form':login_form})
-            
+
         login_form = UserForm()
         return render(request, 'login.html', {'message':message, 'login_form':login_form})
 
