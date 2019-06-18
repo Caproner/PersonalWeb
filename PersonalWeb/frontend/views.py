@@ -38,8 +38,6 @@ class LoginView(View):
                         message = "密码不正确！"
                 except:
                     message = "用户名不存在！"
-            if len(login_form.captcha.errors) != 0:
-                message = "验证码错误！"
             return render(request, 'login.html', {'message':message, 'login_form':login_form})
 
         login_form = UserForm()

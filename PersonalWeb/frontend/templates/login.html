@@ -13,7 +13,13 @@
     <div class="col-md-4 col-md-offset-4">
         <form class='form-login' action="/login" method="post">
             {% if message %}
-                <div class="alert alert-warning">{{ message }}</div>
+                <div class="alert alert-warning">
+                    {% if login_form.captcha.error %}
+                        验证码错误！
+                    {% else %}
+                        {{ message }}
+                    {% endif %}
+                </div>
             {% endif %}
             {% csrf_token %}
             <h1 class="text-center">欢迎登录</h1>
