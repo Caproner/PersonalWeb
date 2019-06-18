@@ -16,6 +16,10 @@
                 <div class="alert alert-warning">
                     {% if login_form.captcha.errors %}
                         验证码错误！
+                    {% elif login_form.username.errors %}
+                        {{ login_form.username.errors }}
+                    {% elif login_form.password.errors %}
+                        {{ login_form.password.errors }}
                     {% else %}
                         {{ message }}
                     {% endif %}

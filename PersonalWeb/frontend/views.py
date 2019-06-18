@@ -44,8 +44,6 @@ class LoginView(View):
                     message = "用户名不存在！"
             return render(request, 'login.html', {'message':message, 'login_form':login_form})
 
-        if len(login_form.errors) != 0:
-            message = login_form.errors
         login_form = UserForm()
         return render(request, 'login.html', {'message':message, 'login_form':login_form})
 
