@@ -38,12 +38,15 @@ class UserInfoModel(models.Model):
         try:
             rds.hdel(config.USER_INFO, self.name)
             rds.hset(config.USER_INFO, self.name, json.dumps(elem_dict))
+            rds.hdel(config.EMAIL_TO_USER, self.email)
+            rds.hset(config.EMAIL_TO_USER, self.email, self.name)
         except Exception as e:
             logger.error('[REDIS]SAVE ERROR %s', e)
 
     def delete(self, *args, **kwargs):
         try:
             rds.hdel(config.USER_INFO, self.name)
+            rds.hdel(config.EMAIL_TO_USER, self.email)
         except Exception as e:
             logger.error('[REDIS]DELETE ERROR %s', e)
         super(UserInfoModel, self).delete(*args, **kwargs)
@@ -52,11 +55,27 @@ class UserInfoModel(models.Model):
     def get_user(cls, username):
         user_info = {}
         try:
-            user_info = json.loads(rds.hget(config.USER_INFO, username))
+            user_info_json = rds.hget(config.USER_INFO, username)
+            if not user_info_json:
+                user_info = {}
+            else:
+                user_info = json.loads(user_info_json)
         except Exception as e:
-            logger.error('[REDIS]LGETALL ERROR %s', e)
+            logger.error('[REDIS]LGET ERROR %s', e)
             user_info = {}
         return user_info
+    
+    @classmethod
+    def get_username_from_email(cls, email)
+        username = ''
+        try:
+            username = rds.hget(config.EMAIL_TO_USER, email)
+            if not username:
+                username = ''
+        except Exception as e:
+            logger.error('[REDIS]LGET ERROR %s', e)
+            username = ''
+        return username
 
 # 干员信息表model
 class AgentInfoModel(models.Model):

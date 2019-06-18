@@ -9,3 +9,4 @@ REDIS_DB = 1
 # 配置key
 AGENT_INFO_BY_RANK = "agent_info_%s"
 USER_INFO = "user_info"
+EMAIL_TO_USER = "email_to_user"

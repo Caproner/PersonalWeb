@@ -49,7 +49,38 @@ class LoginView(View):
 
 class RegisterView(View):
     def get(self, request, *args, **kwargs):
+        if request.session.get('is_login', None): # 登录状态不允许注册。你可以修改这条原则！
+            return redirect("/index")
         return render(request, "register.html")
+    def post(self, request, *args, **kwargs):
+        if request.session.get('is_login',None):
+            return redirect('/index')
+        if request.method == 'POST':
+            register_form = RegisterForm(request.POST)
+            message = "请检查填写的内容！"
+            if register_form.is_valid():
+                username = register_form.cleaned_data['username']
+                password1 = register_form.cleaned_data['password1'] 
+                password2 = register_form.cleaned_data['password2'] 
+                email = register_form.cleaned_data['email']
+                sex = register_form.cleaned_data['sex']
+                username = username.strip()
+                if UserInfoModel.get_user(username) != {}:
+                    message = '用户名已被占用'
+                elif UserInfoModel.get_username_from_email(email) != '':
+                    message = '邮箱已被占用'
+                else:
+                    new_user = models.User.objects.create()
+                    new_user.name = username
+                    new_user.password = password1
+                    new_user.email = email
+                    new_user.sex = sex
+                    new_user.save()
+                    return redirect('/index')
+            return render(request, 'register.html', {'message':message, 'register_form':register_form})
+
+        register_form = UserForm()
+        return render(request, 'register.html', {'message':message, 'register_form':register_form})
 
 class LogoutView(View):
     def get(self, request, *args, **kwargs):
