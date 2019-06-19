@@ -5,16 +5,24 @@ function rsa(password){
     return encrypt.encrypt(password);
 }
 
+function rsa_password(password){
+    if(password.length > 19){
+        password = '1234567890123456789';
+    }
+    password = rsa(password);
+    return password;
+}
+
 function login_crypt(){
-    var password = rsa($('#id_password').val());
+    var password = rsa_password($('#id_password').val());
     $('#id_password').val(password);
     return true;
 }
 
 function register_crypt(){
-    var password1 = rsa($('#id_password1').val());
+    var password1 = rsa_passworda($('#id_password1').val());
     $('#id_password1').val(password1);
-    var password2 = rsa($('#id_password2').val());
+    var password2 = rsa_password($('#id_password2').val());
     $('#id_password2').val(password2);
     return true;
 }
