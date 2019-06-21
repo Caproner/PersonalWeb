@@ -57,7 +57,28 @@ class UserInfoModel(models.Model):
         try:
             user_info_json = rds.hget(config.USER_INFO, username)
             if not user_info_json:
-                user_info = {}
+                sql_user_info_json = cls.objects.filter(name = username)
+                if len(sql_user_info_json) == 0:
+                    user_info = {}
+                else:
+                    for var in sql_user_info_json:
+                        elem_dict = {
+                            'name' : var.name,
+                            'password' : var.password,
+                            'email' : var.email,
+                            'sex' : var.sex,
+                            'c_time' : var.c_time.strftime("%Y-%m-%d %H:%M:%S")
+                        }
+                    try:
+                        rds.hdel(config.USER_INFO, var.name)
+                        rds.hset(config.USER_INFO, var.name, json.dumps(elem_dict))
+                        rds.hdel(config.EMAIL_TO_USER, var.email)
+                        rds.hset(config.EMAIL_TO_USER, var.email, var.name)
+                        user_info_json = rds.hget(config.USER_INFO, username)
+                        user_info = json.loads(user_info_json)
+                    except Exception as e:
+                        logger.error('[REDIS]SAVE ERROR %s', e)
+                        user_info = {}
             else:
                 user_info = json.loads(user_info_json)
         except Exception as e:
@@ -72,6 +93,27 @@ class UserInfoModel(models.Model):
             username = rds.hget(config.EMAIL_TO_USER, user_email)
             if not username:
                 username = ''
+                sql_username = cls.objects.filter(email = user_email)
+                if len(sql_username) == 0:
+                    username = ''
+                else:
+                    for var in sql_username:
+                        elem_dict = {
+                            'name' : var.name,
+                            'password' : var.password,
+                            'email' : var.email,
+                            'sex' : var.sex,
+                            'c_time' : var.c_time.strftime("%Y-%m-%d %H:%M:%S")
+                        }
+                    try:
+                        rds.hdel(config.USER_INFO, var.name)
+                        rds.hset(config.USER_INFO, var.name, json.dumps(elem_dict))
+                        rds.hdel(config.EMAIL_TO_USER, var.email)
+                        rds.hset(config.EMAIL_TO_USER, var.email, var.name)
+                        username = rds.hget(config.EMAIL_TO_USER, user_email)
+                    except Exception as e:
+                        logger.error('[REDIS]SAVE ERROR %s', e)
+                        username = ''
         except Exception as e:
             logger.error('[REDIS]LGET ERROR %s', e)
             username = ''
